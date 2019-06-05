@@ -1,0 +1,26 @@
+stages:
+ - build
+ - test
+build_deb_packet:
+  stage: build
+  image: docker:latest
+  services:
+    - docker:dind
+  before_script:
+#    
+  script:
+#    - docker-compose up -d
+#    - docker-compose ps 
+#    - docker exec crawler_crawler_1 /bin/bash -c "python3 -m unittest discover -s tests/ && coverage run -m unittest discover -s tests/ && coverage report --include crawler/crawler.py"
+
+#build_rpm_packet:
+#  stage: build
+
+test_deb_packet:
+  stage: deploy
+  image: alpine:latest
+  before_script:
+  script:
+  environment:
+    name: production
+#  when: manual
