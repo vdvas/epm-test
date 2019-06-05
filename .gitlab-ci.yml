@@ -3,13 +3,20 @@ stages:
  - test
 build_deb_packet:
   stage: build
-  image: docker:latest
+  image: ubuntu:latest
   services:
     - docker:dind
   before_script:
-#    
+    sudo apt-get update
+    sudo apt install gcc build-essential    
   script:
-#    - docker-compose up -d
+    ls
+    cd epm
+    ./configure
+    make
+    sudo make install
+    epm epm
+    cd os-major.minor-architecture
 #    - docker-compose ps 
 #    - docker exec crawler_crawler_1 /bin/bash -c "python3 -m unittest discover -s tests/ && coverage run -m unittest discover -s tests/ && coverage report --include crawler/crawler.py"
 
@@ -21,6 +28,7 @@ test_deb_packet:
   image: alpine:latest
   before_script:
   script:
-  environment:
-    name: production
+    echo test
+#  environment:
+#    name: production
 #  when: manual
