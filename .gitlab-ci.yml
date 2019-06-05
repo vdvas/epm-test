@@ -24,7 +24,7 @@ build_deb_packet:
 #  stage: build
 
 test_deb_packet:
-  stage: deploy
+  stage: test
   image: alpine:latest
 #  before_script:
 #    echo test
