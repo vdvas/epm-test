@@ -8,7 +8,7 @@ build_deb_packet:
     - docker:dind
   before_script:
     - apt-get update
-    - apt install gcc build-essential    
+    - apt install gcc build-essential -y
   script:
     - ls
     - cd epm
