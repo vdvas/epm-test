@@ -30,11 +30,14 @@ build_deb_packet:
 
 test_deb_packet:
   stage: test
-  image: alpine:latest
+  image: ubuntu:latest
 #  before_script:
 #    echo test
   script:
-    - echo test
-#  environment:
-#    name: production
-#  when: manual
+    - ls
+    - ls epm
+    - ls epm/deb-distr
+  artifacts:
+    name: "$CI_COMMIT_REF_NAME"
+    paths:
+      - epm/deb-distr
