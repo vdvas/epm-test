@@ -15,7 +15,7 @@ build_deb_packet:
     - ./configure
     - make
     - make install
-    - epm epm --output-dir deb-distr
+    - epm -f deb epm --output-dir deb-distr
   artifacts:
     name: "$CI_COMMIT_REF_NAME"
     paths:
@@ -36,8 +36,10 @@ test_deb_packet:
     - ls epm
     - ls epm/deb-distr
     - cd epm/deb-distr
-    - tar -zxf epm-4.4.1-linux-4.15-x86_64.tar.gz
+    - tar -zxf epm-4.4.1-linux-4.15-x86_64.deb.tgz
     - ls
+    - dpkg -i epm-4.4.1-linux-4.15-x86_64.deb
+    - dpkg -l epm
   artifacts:
     name: "$CI_COMMIT_REF_NAME"
     paths:
