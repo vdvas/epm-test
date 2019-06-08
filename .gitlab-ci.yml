@@ -19,11 +19,9 @@ build_deb_packet:
   artifacts:
     name: "$CI_COMMIT_REF_NAME"
     paths:
-#      - deb-distr/
       - epm/deb-distr/
-#    - cd os-major.minor-architecture
-#    - docker-compose ps 
-#    - docker exec crawler_crawler_1 /bin/bash -c "python3 -m unittest discover -s tests/ && coverage run -m unittest discover -s tests/ && coverage report --include crawler/crawler.py"
+# Получить переменную и передать её в другой этап (test)
+# epm --version |head -n1 |tail -c 6 > это версия epm. Нужно еще удалить пробел в конце.
 
 #build_rpm_packet:
 #  stage: build
@@ -37,6 +35,9 @@ test_deb_packet:
     - ls
     - ls epm
     - ls epm/deb-distr
+    - cd epm/deb-distr
+    - tar -zxf epm-4.4.1-linux-4.15-x86_64.tar.gz
+    - ls
   artifacts:
     name: "$CI_COMMIT_REF_NAME"
     paths:
