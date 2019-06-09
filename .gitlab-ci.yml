@@ -17,68 +17,21 @@ build_deb_packet:
     name: "$CI_COMMIT_SHA"
     paths:
       - epm/deb-distr/
-# Получить переменную и передать её в другой этап (test)
-# epm --version |head -n1 |tail -c 6 > это версия epm. Нужно еще удалить пробел в конце.
 
 build_rpm_packet:
   stage: build
-#  image: centos:latest
-  image: centos:6
+  image: centos:latest
   before_script:
     - yum update -y
     - yum groupinstall "Development Tools" -y
   script:
-    - ls
     - cd epm
     - ./configure
     - make
     - make install
-#    - epm -vvv -f rpm epm --output-dir rpm-distr
     - epm -vvv -a noarch -f rpm epm --output-dir rpm-test1
   artifacts:
     name: "$CI_COMMIT_SHA"     
-    paths:
-      - epm/rpm-distr/
-  when: manual
-
-build_rpm_packet_rpmbild:
-  stage: build
-#  image: centos:latest
-  image: djerfy/gitlab-ci-rpmbuild
-#  before_script:
-#    - yum update -y
-#    - yum groupinstall "Development Tools" -y
-  script:
-    - ls
-    - cd epm
-    - ./configure
-    - make
-    - make install
-#    - epm -vvv -f rpm epm --output-dir rpm-distr
-    - epm -vvv -a noarch -f rpm epm --output-dir rpm-test1
-  artifacts:
-    name: "$CI_COMMIT_SHA"
-    paths:
-      - epm/rpm-distr/
-  when: manual
-
-build_rpm_packet_suse:
-  stage: build
-#  image: centos:latest
-  image: opensuse:latest
-  before_script:
-    - yum update -y
-    - yum groupinstall "Development Tools" -y
-  script:
-    - ls
-    - cd epm
-    - ./configure
-    - make
-    - make install
-#    - epm -vvv -f rpm epm --output-dir rpm-distr
-    - epm -vvv -a noarch -f rpm epm --output-dir rpm-test1
-  artifacts:
-    name: "$CI_COMMIT_SHA"
     paths:
       - epm/rpm-distr/
   when: manual
