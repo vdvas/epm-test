@@ -41,13 +41,13 @@ build_rpm_packet:
       - epm/rpm-distr/
   when: manual
 
-build_rpm_packet_fedora:
+build_rpm_packet_rpmbild:
   stage: build
 #  image: centos:latest
-  image: fedora:latest
-  before_script:
-    - yum update -y
-    - yum groupinstall "Development Tools" -y
+  image: djerfy/gitlab-ci-rpmbuild
+#  before_script:
+#    - yum update -y
+#    - yum groupinstall "Development Tools" -y
   script:
     - ls
     - cd epm
