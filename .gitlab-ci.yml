@@ -15,11 +15,11 @@ build_deb_packet:
     - make
     - make install
     - epm -f deb epm --output-dir deb-distr
-    - ls /
-    - ls
-    - ls epm
+#    - ls /
+#    - ls
+#    - ls epm
 #    - ls epm/epm
-    - ls deb-distr -l
+#    - ls deb-distr -l
   artifacts:
     name: "$CI_COMMIT_SHA"
     paths:
