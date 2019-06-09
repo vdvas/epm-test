@@ -41,6 +41,48 @@ build_rpm_packet:
       - epm/rpm-distr/
   when: manual
 
+build_rpm_packet_fedora:
+  stage: build
+#  image: centos:latest
+  image: fedora:latest
+  before_script:
+    - yum update -y
+    - yum groupinstall "Development Tools" -y
+  script:
+    - ls
+    - cd epm
+    - ./configure
+    - make
+    - make install
+#    - epm -vvv -f rpm epm --output-dir rpm-distr
+    - epm -vvv -a noarch -f rpm epm --output-dir rpm-test1
+  artifacts:
+    name: "$CI_COMMIT_SHA"
+    paths:
+      - epm/rpm-distr/
+  when: manual
+
+build_rpm_packet_suse:
+  stage: build
+#  image: centos:latest
+  image: opensuse:latest
+  before_script:
+    - yum update -y
+    - yum groupinstall "Development Tools" -y
+  script:
+    - ls
+    - cd epm
+    - ./configure
+    - make
+    - make install
+#    - epm -vvv -f rpm epm --output-dir rpm-distr
+    - epm -vvv -a noarch -f rpm epm --output-dir rpm-test1
+  artifacts:
+    name: "$CI_COMMIT_SHA"
+    paths:
+      - epm/rpm-distr/
+  when: manual
+
 test_deb_packet:
   stage: test
   image: ubuntu:latest
