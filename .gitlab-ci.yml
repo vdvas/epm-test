@@ -29,9 +29,9 @@ build_rpm_packet:
     - ./configure
     - make
     - make install
-    - epm -vvv -a noarch -f rpm epm --output-dir rpm-test1
+    - epm -vvv -f rpm epm --output-dir rpm-distr
   artifacts:
-    name: "$CI_COMMIT_SHA"     
+    name: "$CI_COMMIT_SHA"
     paths:
       - epm/rpm-distr/
   when: manual
