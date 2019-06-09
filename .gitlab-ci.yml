@@ -17,20 +17,34 @@ build_deb_packet:
     - make install
     - epm -f deb epm --output-dir deb-distr
   artifacts:
-    name: "$CI_COMMIT_REF_NAME"
+    name: "$CI_COMMIT_SHA"
     paths:
       - epm/deb-distr/
 # Получить переменную и передать её в другой этап (test)
 # epm --version |head -n1 |tail -c 6 > это версия epm. Нужно еще удалить пробел в конце.
 
-#build_rpm_packet:
-#  stage: build
+build_rpm_packet:
+  stage: build
+  image: rpmbuild/centos7
+#  image: centos:07
+  before_script:
+    - echo hi
+  script:
+    - ls
+    - cd epm
+    - ./configure
+    - make
+    - make install
+    - epm -f rpm epm --output-dir rpm-distr
+  artifacts:
+    name: "$CI_COMMIT_SHA"     
+    paths:
+      - epm/rpm-distr/
+
 
 test_deb_packet:
   stage: test
   image: ubuntu:latest
-#  before_script:
-#    echo test
   script:
     - ls
     - ls epm
@@ -41,6 +55,6 @@ test_deb_packet:
     - dpkg -i epm-4.4.1-linux-4.15-x86_64.deb
     - dpkg -l epm
   artifacts:
-    name: "$CI_COMMIT_REF_NAME"
+    name: "$CI_COMMIT_SHA"
     paths:
       - epm/deb-distr
