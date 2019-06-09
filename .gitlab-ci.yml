@@ -25,10 +25,11 @@ build_deb_packet:
 
 build_rpm_packet:
   stage: build
-  image: rpmbuild/centos7
+  image: centos:latest
 #  image: centos:07
   before_script:
-    - echo hi
+    - yum update -y
+    - yum groupinstall "Development Tools" -y
   script:
     - ls
     - cd epm
