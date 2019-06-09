@@ -18,7 +18,8 @@ build_deb_packet:
     - ls /
     - ls
     - ls epm
-    - ls epm/deb-distr
+    - ls epm/epm
+    - ls deb-distr
   artifacts:
     name: "$CI_COMMIT_SHA"
     paths:
