@@ -4,8 +4,8 @@ stages:
 build_deb_packet:
   stage: build
   image: ubuntu:latest
-  services:
-    - docker:dind
+#  services:
+#    - docker:dind
   before_script:
     - apt-get update
     - apt install gcc build-essential -y
@@ -16,12 +16,13 @@ build_deb_packet:
     - make install
     - epm -f deb epm --output-dir deb-distr
     - ls /
-    - ls /epm
-    - ls /epm/deb-distr
+    - ls
+    - ls epm
+    - ls epm/deb-distr
   artifacts:
     name: "$CI_COMMIT_SHA"
     paths:
-      - /epm/deb-distr/
+      - epm/deb-distr/
 # Получить переменную и передать её в другой этап (test)
 # epm --version |head -n1 |tail -c 6 > это версия epm. Нужно еще удалить пробел в конце.
 
