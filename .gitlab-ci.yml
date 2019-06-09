@@ -4,8 +4,6 @@ stages:
 build_deb_packet:
   stage: build
   image: ubuntu:latest
-#  services:
-#    - docker:dind
   before_script:
     - apt-get update
     - apt install gcc build-essential -y
@@ -15,11 +13,6 @@ build_deb_packet:
     - make
     - make install
     - epm -f deb epm --output-dir deb-distr
-#    - ls /
-#    - ls
-#    - ls epm
-#    - ls epm/epm
-#    - ls deb-distr -l
   artifacts:
     name: "$CI_COMMIT_SHA"
     paths:
@@ -40,8 +33,8 @@ build_rpm_packet:
     - ./configure
     - make
     - make install
-    - epm -vvv -f rpm epm --output-dir rpm-distr
-    - epm -vvv -a noarch -f rpm epm --outpud-dit rpm-test1
+#    - epm -vvv -f rpm epm --output-dir rpm-distr
+    - epm -vvv -a noarch -f rpm epm --output-dir rpm-test1
   artifacts:
     name: "$CI_COMMIT_SHA"     
     paths:
