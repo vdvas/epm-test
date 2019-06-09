@@ -22,8 +22,8 @@ build_deb_packet:
 
 build_rpm_packet:
   stage: build
-  image: centos:latest
-#  image: centos:07
+#  image: centos:latest
+  image: centos:6
   before_script:
     - yum update -y
     - yum groupinstall "Development Tools" -y
