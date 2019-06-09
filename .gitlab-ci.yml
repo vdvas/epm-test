@@ -10,7 +10,6 @@ build_deb_packet:
     - apt-get update
     - apt install gcc build-essential -y
   script:
-    - ls
     - cd epm
     - ./configure
     - make
@@ -36,7 +35,8 @@ build_rpm_packet:
     - ./configure
     - make
     - make install
-    - epm -f rpm epm --output-dir rpm-distr
+    - epm -vvv -f rpm epm --output-dir rpm-distr
+    - epm -vvv -a noarch -f rpm epm --outpud-dit rpm-test1
   artifacts:
     name: "$CI_COMMIT_SHA"     
     paths:
@@ -47,12 +47,8 @@ test_deb_packet:
   stage: test
   image: ubuntu:latest
   script:
-    - ls
-    - ls epm
-    - ls epm/deb-distr
     - cd epm/deb-distr
     - tar -zxf epm-4.4.1-linux-4.15-x86_64.deb.tgz
-    - ls
     - dpkg -i epm-4.4.1-linux-4.15-x86_64.deb
     - dpkg -l epm
   artifacts:
